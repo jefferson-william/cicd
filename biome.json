@@ -1,4 +1,83 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
-  "extends": ["@ivangabriele/biome-config"]
+	"$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on",
+				"useSortedAttributes": "on",
+				"useSortedKeys": "on",
+				"useSortedProperties": "on"
+			}
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
+	"files": {
+		"includes": [
+			"src/**",
+			"!**/.sst",
+			"!**/.github",
+			"!**/dist",
+			"!**/node_modules",
+			"!**/package.json"
+		]
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true,
+		"formatter": {
+			"enabled": true
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"complexity": {
+				"noForEach": "off",
+				"noUselessConstructor": "off"
+			},
+			"correctness": {
+				"useExhaustiveDependencies": "off"
+			},
+			"recommended": true,
+			"style": {
+				"useNodejsImportProtocol": "off"
+			},
+			"suspicious": {
+				"noAssignInExpressions": "off"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*"],
+			"javascript": {
+				"formatter": {
+					"jsxQuoteStyle": "double",
+					"quoteStyle": "single",
+					"semicolons": "asNeeded"
+				},
+				"parser": {
+					"unsafeParameterDecoratorsEnabled": true
+				}
+			},
+			"linter": {
+				"rules": {
+					"complexity": {
+						"noForEach": "off"
+					},
+					"suspicious": {
+						"noExplicitAny": "off"
+					}
+				}
+			}
+		}
+	],
+	"vcs": {
+		"clientKind": "git",
+		"enabled": true,
+		"useIgnoreFile": true
+	}
 }

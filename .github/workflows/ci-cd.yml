@@ -10,11 +10,11 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  NODE_VERSION: 20
+  NODE_VERSION: 24
 
 jobs:
   ci:
-    name: Continuous Integration
+    name: CI
     runs-on: ubuntu-latest
     
     steps:
@@ -42,7 +42,7 @@ jobs:
         run: bun build
 
   deploy:
-    name: Deploy to AWS
+    name: CD
     runs-on: ubuntu-latest
     needs: ci
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -59,6 +59,9 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Run SST install
+        run: bun sst install
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -66,21 +69,5 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Create .env.production file
-        run: |
-          if [ -n "${{ secrets.ENV_PRODUCTION }}" ]; then
-            echo "${{ secrets.ENV_PRODUCTION }}" > .env.production
-          else
-            # Alternativa: criar arquivo a partir de variáveis individuais
-            touch .env.production
-            # Adicione suas variáveis aqui ou use secrets individuais
-            # Exemplo:
-            # echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env.production
-            # echo "API_KEY=${{ secrets.API_KEY }}" >> .env.production
-          fi
-        shell: bash
-
       - name: Deploy with SST
-        run: bun run deploy --stage production
-        env:
-          SST_STAGE: production
+        run: bun sst deploy

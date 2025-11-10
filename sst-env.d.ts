@@ -3,20 +3,20 @@
 /* eslint-disable */
 /* deno-fmt-ignore-file */
 
-declare module 'sst' {
+declare module "sst" {
   export interface Resource {
-    Server: {
-      service: string
-      type: 'sst.aws.Service'
-      url: string
+    "Server": {
+      "service": string
+      "type": "sst.aws.Service"
+      "url": string
     }
-    Vpc: {
-      bastion: string
-      type: 'sst.aws.Vpc'
+    "Vpc": {
+      "bastion": string
+      "type": "sst.aws.Vpc"
     }
   }
 }
 /// <reference path="sst-env.d.ts" />
 
-import 'sst'
+import "sst"
 export {}
