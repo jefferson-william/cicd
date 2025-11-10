@@ -9,11 +9,13 @@
     "dev": "bun run --watch index.ts",
     "format": "biome format --write",
     "lint": "biome check --write",
-    "start": "bun run index.ts"
+    "start": "bun run index.ts",
+    "sst": "sst"
   },
   "dependencies": {
     "@biomejs/biome": "^2.3.4",
-    "hono": "^4.10.4"
+    "hono": "^4.10.4",
+    "sst": "3.17.23"
   },
   "devDependencies": {
     "@ivangabriele/biome-config": "^2.0.0",
